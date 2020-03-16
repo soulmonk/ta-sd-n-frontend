@@ -77,8 +77,8 @@ const mutations = {
     state.isAuthenticated = true;
     state.user = user;
     state.errors = {};
-    updateHeader()
     JwtService.saveToken(state.user.token);
+    updateHeader()
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;

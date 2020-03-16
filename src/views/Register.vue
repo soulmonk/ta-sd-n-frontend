@@ -17,7 +17,7 @@
               <input
                 class="form-control form-control-lg"
                 type="text"
-                v-model="username"
+                v-model="name"
                 placeholder="Username"
               />
             </fieldset>
@@ -55,7 +55,7 @@ export default {
   name: "RwvRegister",
   data() {
     return {
-      username: "",
+      name: "",
       email: "",
       password: ""
     };
@@ -71,7 +71,7 @@ export default {
         .dispatch(REGISTER, {
           email: this.email,
           password: this.password,
-          username: this.username
+          name: this.name
         })
         .then(() => this.$router.push({ name: "training" }));
     }
