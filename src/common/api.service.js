@@ -48,7 +48,7 @@ export const TrainingService = {
   },
 
   removeSession (id) {
-    return this._api.delete('/session' + id)
+    return this._api.delete('/session/' + id)
   },
 
   completeSession (id) {

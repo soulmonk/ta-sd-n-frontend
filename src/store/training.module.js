@@ -5,7 +5,7 @@ import {
   ADD_TO_TRAINING_PLAN,
   REMOVE_FROM_TRAINING_PLAN,
   RESET_TRAINING_PLAN,
-  UPDATE_SORT_TRAINING_PLAN, COMPLETE_SESSION
+  UPDATE_SORT_TRAINING_PLAN, COMPLETE_SESSION, DELETE_SESSION
 } from './actions.type'
 import { SET_SESSIONS, SET_TRAINING_ERROR } from './mutations.type'
 
@@ -42,6 +42,17 @@ const actions = {
   },
   [SESSION_CREATE] (context, session) {
     return TrainingService.createSession(session)
+      .then(({ data: { data } }) => {
+        // todo set session in bank
+        context.dispatch(FETCH_SESSIONS)
+        return data
+      })
+      .catch(({ response }) => {
+        context.commit(SET_TRAINING_ERROR, response.data.errors)
+      })
+  },
+  [DELETE_SESSION] (context, id) {
+    return TrainingService.removeSession(id)
       .then(({ data: { data } }) => {
         // todo set session in bank
         context.dispatch(FETCH_SESSIONS)
